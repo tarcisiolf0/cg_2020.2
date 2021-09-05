@@ -241,80 +241,14 @@ def draw_cylinder(x, y, z, radius, height):
         c_angle += angle_stepsize
     glEnd()
 
-    glPushMatrix()
-    glTranslatef(x,y,z)
-    #cama
-    draw_colored_block(0.5, 0.4, 0.1, 4, 8, 0.5,
-                       glm.vec3(0.8, 0.8, 0.8), glm.vec3(1, 1, 1),
-                       glm.vec3(0.6, 0.6, 0.6), glm.vec3(1, 1, 1),
-                       glm.vec3(1, 1, 1), glm.vec3(1, 1, 1))
-    #colchão
-    glColor3f(0.212, 0.205, 0.205)
-    draw_block(0.5, 0.9, 0.1, 4, 8, 0.6)
-    #pés da cama
-    glColor3f(0.18, 0.16, 0.16)
-    draw_cylinder(0.5+0.2, 0, 0.2, 0.1, 0.4)
-    draw_cylinder(0.5+0.2, 0, 4, 0.1, 0.4)
-    draw_cylinder(0.5+0.2, 0, 7.8, 0.1, 0.4)
-    draw_cylinder(0.5+3.8, 0, 0.2, 0.1, 0.4)
-    draw_cylinder(0.5+3.8, 0, 7.8, 0.1, 0.4)
-    glPopMatrix()
-
-def draw_wardrobe(x, y, z):
-    glPushMatrix()
-    glTranslatef(x, y, z)
-    glColor3ub(250, 250, 250)
-    draw_texturized_block_right(0, 0, 0, 2.5, 12, 5, textures['geladeira'])
-    glPopMatrix()
-
-"""
-def draw_fan_table(x, y, z):
-    glPushMatrix()
-    glTranslatef(x, y, z)
-    glColor3ub(250, 250, 250)
-    #tampo
-    draw_block(0, 1.5, 0, 3, 2, 0.1)
-    #pé esquerdo trás
-    draw_block(0, 0, 0, 0.3, 0.1, 1.5)
-    draw_block(0, 0, 0, 0.1, 0.3, 1.5)
-    #pé esquerdo frente
-    glPushMatrix()
-    glTranslatef(0, 0, 2)
-    glRotatef(90, 0, 1, 0)
-    draw_block(0, 0, 0, 0.3, 0.1, 1.5)
-    draw_block(0, 0, 0, 0.1, 0.3, 1.5)
-    glPopMatrix()
-    #pé direito trás
-    glPushMatrix()
-    glTranslatef(3, 0, 0)
-    glRotatef(270, 0, 1, 0)
-    draw_block(0, 0, 0, 0.3, 0.1, 1.5)
-    draw_block(0, 0, 0, 0.1, 0.3, 1.5)
-    glPopMatrix()
-    #pé direito frente
-    glPushMatrix()
-    glTranslatef(3, 0, 2)
-    glRotatef(180, 0, 1, 0)
-    draw_block(0, 0, 0, 0.3, 0.1, 1.5)
-    draw_block(0, 0, 0, 0.1, 0.3, 1.5)
-    glPopMatrix()
-
-    glPopMatrix() # fim fan_table
-"""
-
 def draw_fan(x, y, z, rot):
     glPushMatrix() #begin fan
     glTranslatef(x, y, z)
-    glColor3ub(100, 100, 100)
-    draw_cylinder(0, 0, 0, 1, 0.2) # base
-
-    glColor3ub(60, 60, 60)
-    draw_cylinder(0, 0.2, 0, 0.2, 1.5) #haste
 
     glPushMatrix() # motor + helices
     glColor3ub(80, 80, 80)
-    glTranslatef(0, 1.7, -2)
-    glRotatef(90, 1, 0, 0)
+    glTranslatef(0, 6, -12)
+    glRotatef(180, 1, 0, 0)
     draw_cylinder(0, 1.7, 0, 0.4, 0.8) #motor
     glColor3ub(10, 10, 10)
     draw_cylinder(0, 2.5, 0, 0.05, 0.1)  # haste helices
@@ -337,34 +271,7 @@ def draw_fan(x, y, z, rot):
     glPopMatrix() #pop motor
     # glutPostRedisplay()
     glPopMatrix() #end fan
-
-def draw_table(x, y, z):
-    glPushMatrix()
-    glTranslatef(x, y, z)
-
-    # tampo
-    draw_colored_block(0, 2, 0, 4, 2, 0.1,
-                       glm.vec3(0.8, 0.8, 0.8), glm.vec3(1, 1, 1),
-                       glm.vec3(0.6, 0.6, 0.6), glm.vec3(1, 1, 1),
-                       glm.vec3(0.92, 0.92, 0.92), glm.vec3(1, 1, 1))
-    #lateral esquerda
-    draw_colored_block(0, 0, 0, 0.1, 2, 2,
-                       glm.vec3(0.8, 0.8, 0.8), glm.vec3(1, 1, 1),
-                       glm.vec3(0.6, 0.6, 0.6), glm.vec3(1, 1, 1),
-                       glm.vec3(1, 1, 1), glm.vec3(1, 1, 1))
-    #lateral direita
-    draw_colored_block(3.9, 0, 0, 0.1, 2, 2,
-                       glm.vec3(0.8, 0.8, 0.8), glm.vec3(1, 1, 1),
-                       glm.vec3(0.6, 0.6, 0.6), glm.vec3(1, 1, 1),
-                       glm.vec3(1, 1, 1), glm.vec3(1, 1, 1))
-    #frente
-    draw_colored_block(0.1, 1.8, 1.9, 3.8, 0.1, 0.2,
-                       glm.vec3(0.8, 0.8, 0.8), glm.vec3(1, 1, 1),
-                       glm.vec3(0.6, 0.6, 0.6), glm.vec3(1, 1, 1),
-                       glm.vec3(1, 1, 1), glm.vec3(1, 1, 1))
-
-    glPopMatrix()
-
+    
 def draw_chair(x, y, z):
     glPushMatrix()
     glTranslatef(x, y, z)
@@ -529,15 +436,7 @@ def display():
     #draw_block(1, 0, 10, 3, 0.4, 6)
     draw_block(1, 0, 10, 9, 0.4, 7)
 
-    """
-    # part7
-    draw_block(4, 5, 10, 6, 0.4, 1)
-    # part8
-    draw_block(4, 0, 10, 3, 0.4, 4)
-    # part9
-    draw_block(7, 0, 10, 3, 0.4, 5)
-    """
-    
+   
     # alisais esquerdo - suporte porta lado esquerdo
     draw_colored_block_fixed(-8, 0, 10, 0.1, 0.4, 5)
     # alisais direito - suporte porta direito
@@ -563,13 +462,12 @@ def display():
     draw_texturized_block_front_and_back(0,0,0, 2.8, 0.1, 4.9, textures['porta1'], textures['porta1'])
     glPopMatrix()
 
-    #janela 1
+    #janela 
     glPushMatrix()
     #glTranslatef(-3, 5, 10)
     glTranslatef(-2.9, 4.9, 10)
     glRotatef(-window_angle, 1, 0, 0)
     glColor3ub(70, 35, 26)
-    # draw_colored_block_fixed(0, 0, 0, 4, 0.1, -1)
     #draw_texturized_block_front_and_back(0, 0, 0, 4, 0.1, -2.5, textures['janela'], textures['janela'])
     draw_texturized_block_front_and_back(0, 0, 0, 3.8, 0.1, -2.3, textures['janela'], textures['janela'])
     glPopMatrix()
@@ -618,59 +516,30 @@ def display():
     glTranslatef(-2, 0, -10)
     draw_sink(0, 0, 0)
     glPopMatrix()
-    """
-
-    #comoda e tv
-    glPushMatrix()
-    glTranslatef(4, 0, 9.99)
-    glRotatef(180, 0, 1, 0)
-    draw_dresser(0, 0, 0)
-    glPopMatrix()
-
-    # guarda-roupas pequeno
-    glPushMatrix()
-    glScalef(0.6, 1, 0.3)
-    glTranslatef(16.2, 0, 33)
-    glRotatef(180, 0, 1, 0)
-    draw_wardrobe(0, 0, 0)
-    glPopMatrix()
-
-    #quadro van gogh
+    
+    # Quadro
     glPushMatrix()
     glColor3ub(255, 255, 255)
-    draw_texturized_block_front(2, 4, -9.99, 3, 0.05, 2, textures['quadro1'])
+    draw_texturized_block_front(-1, 4, -9.99, 2, 0.05, 2, textures['quadro1'])
     glPopMatrix()
 
-    #quadro miro
-    glPushMatrix()
-    glColor3ub(255, 255, 255)
-    draw_texturized_block_front(-4, 4, -9.99, 2, 0.05, 2, textures['miro'])
-    glColor3ub(50, 50, 50)
-    draw_block(-4.1, 3.9, -9.99, 0.1, 0.1, 2.2)#left
-    draw_block(-2, 3.9, -9.99, 0.1, 0.1, 2.2)#down
-    draw_block(-4.1, 3.9, -9.99, 2.1, 0.1, 0.1)#right
-    draw_block(-4.1, 6, -9.99, 2.1, 0.1, 0.1)#up
-    glPopMatrix()
-
-    #mesa do ventilador
+    # Ventilador
     glPushMatrix()
     glTranslatef(-1.3, 0, 9.9)
-    glRotatef(180, 0, 1, 0)
-    draw_fan_table(0, 0, 0)
-    glScalef(0.7, 0.7, 0.7)
     draw_fan(2, 2.3, 1.3, fan_rotation)
     glPopMatrix()
 
+    # Lampada
+    glPushMatrix()
 
-    glPopMatrix()  # pop quarto
-
-    glutSwapBuffers()
+    draw_lamp(0, 2.1, -2, lamp_color)
+    glPopMatrix()
 
     # incrementa a variavel de rotação do ventilador
     if fan_rotation >= 360:
         fan_rotation = 0.0
-    fan_rotation += 3 #velocidade da rotação
-    """
+    fan_rotation += 1 #velocidade da rotação
+
     glPopMatrix()  # pop quarto
 
     glutSwapBuffers()
@@ -896,7 +765,7 @@ def main():
     textures['maquinadelavar'] = load_texture("textures/maquinaDeLavar.jpg")
     textures['teto'] = load_texture("textures/Wood0054.jpg")
     textures['parede'] = load_texture("textures/Tiles093.jpg")
-    textures['quadro1'] = load_texture("textures/quadro1.png")
+    textures['quadro1'] = load_texture("textures/quadro1.jpg")
     textures['porta1'] = load_texture("textures/door4.jpg")
     textures['janela'] = load_texture("textures/janela4.jpg")
 
