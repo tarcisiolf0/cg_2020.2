@@ -28,25 +28,15 @@ lamp_color = glm.vec3(10, 10, 10)
 
 #textures
 textures = {
-    'brick': None,
-    'ceramica': None,
-    'guardaroupa': None,
-    'ednaldo': None,
-    'gavetas_comoda': None,
-    'portas_comoda': None,
+    'piso': None,
+    'geladeira': None,
+    'fogao' : None,
+    'maquinadelavar' : None,
     'teto': None,
     'parede': None,
     'quadro1': None,
-    'quadro2': None,
-    'miro': None,
-    'tela_notebook': None,
-    'base_notebook': None,
     'porta1':None,
-    'porta2': None,
-    'wood': None,
-    'teclado': None,
-    'tomada1': None,
-    'tomada2': None
+    'janela': None
 }
 
 fan_rotation = 0
@@ -274,7 +264,7 @@ def draw_wardrobe(x, y, z):
     glPushMatrix()
     glTranslatef(x, y, z)
     glColor3ub(250, 250, 250)
-    draw_texturized_block_right(0, 0, 0, 2.5, 12, 5, textures['guardaroupa'])
+    draw_texturized_block_right(0, 0, 0, 2.5, 12, 5, textures['geladeira'])
     glPopMatrix()
 
 """
@@ -448,14 +438,21 @@ def draw_refrigerator(x, y, z):
     glPushMatrix()
     glTranslatef(x, y, z)
     glColor3ub(250, 250, 250)
-    draw_texturized_block_right(0, 0, 0, 2, 2.5, 5, textures['guardaroupa'])
+    draw_texturized_block_right(0, 0, 0, 2, 2.5, 5, textures['geladeira'])
     glPopMatrix()
 
 def draw_stove(x, y, z):
     glPushMatrix()
     glTranslatef(x, y, z)
     glColor3ub(250, 250, 250)
-    draw_texturized_block_right(0, 0, 0, 2, 2, 2.5, textures['guardaroupa'])
+    draw_texturized_block_right(0, 0, 0, 2, 2, 2.5, textures['fogao'])
+    glPopMatrix()
+
+def draw_maquinaDeLavar(x, y, z):
+    glPushMatrix()
+    glTranslatef(x, y, z)
+    glColor3ub(250, 250, 250)
+    draw_texturized_block_right(0, 0, 0, 2, 2, 2.5, textures['maquinadelavar'])
     glPopMatrix()
 
 def draw_sink(x, y, z):
@@ -503,7 +500,7 @@ def display():
     glPushMatrix() # push quarto
     # piso
     glColor(1, 1, 1)
-    draw_textured_floor(-10, 0, -10, 20, 20, textures['ceramica'])
+    draw_textured_floor(-10, 0, -10, 20, 20, textures['piso'])
 
     # parede de trás
     glColor3ub(255, 255, 255)
@@ -573,8 +570,8 @@ def display():
     glRotatef(-window_angle, 1, 0, 0)
     glColor3ub(70, 35, 26)
     # draw_colored_block_fixed(0, 0, 0, 4, 0.1, -1)
-    #draw_texturized_block_front_and_back(0, 0, 0, 4, 0.1, -2.5, textures['wood'], textures['wood'])
-    draw_texturized_block_front_and_back(0, 0, 0, 3.8, 0.1, -2.3, textures['wood'], textures['wood'])
+    #draw_texturized_block_front_and_back(0, 0, 0, 4, 0.1, -2.5, textures['janela'], textures['janela'])
+    draw_texturized_block_front_and_back(0, 0, 0, 3.8, 0.1, -2.3, textures['janela'], textures['janela'])
     glPopMatrix()
 
     # parede direita
@@ -607,6 +604,13 @@ def display():
     glTranslatef(4, 0, -9.8)
     glRotatef(-90, 0, 1, 0)
     draw_stove(0, 0, 0)
+    glPopMatrix()
+
+    # Maquina de lavar
+    glPushMatrix()
+    glTranslatef(7, 0, -9.8)
+    glRotatef(-90, 0, 1, 0)
+    draw_maquinaDeLavar(0, 0, 0)
     glPopMatrix()
 
     # Pia
@@ -886,24 +890,15 @@ def main():
     glutMotionFunc(mouse_camera)
 
     #textures
-    textures['brick'] = load_texture("textures/wall.png")
-    textures['ceramica'] = load_texture("textures/ceramica.png")
-    textures['guardaroupa'] = load_texture("textures/guarda-roupa.png")
-    textures['ednaldo'] = load_texture("textures/ednaldo.png")
-    textures['gavetas_comoda'] = load_texture("textures/gavetas_comoda.png")
-    textures['portas_comoda'] = load_texture("textures/portas_comoda.png")
-    textures['teto'] = load_texture("textures/teto-pvc.png")
-    textures['parede'] = load_texture("textures/parede.png")
+    textures['piso'] = load_texture("textures/Tiles081.jpg")
+    textures['geladeira'] = load_texture("textures/geladeira3.png")
+    textures['fogao'] = load_texture("textures/fogao3.png")
+    textures['maquinadelavar'] = load_texture("textures/maquinaDeLavar.jpg")
+    textures['teto'] = load_texture("textures/Wood0054.jpg")
+    textures['parede'] = load_texture("textures/Tiles093.jpg")
     textures['quadro1'] = load_texture("textures/quadro1.png")
-    textures['miro'] = load_texture("textures/classic-miro.jpg")
-    textures['tela_notebook'] = load_texture("textures/tela_notebook.png")
-    textures['base_notebook'] = load_texture("textures/base_notebook.png")
-    textures['porta1'] = load_texture("textures/porta1.png")
-    textures['porta2'] = load_texture("textures/porta2.png")
-    textures['wood'] = load_texture("textures/wood.png")
-    textures['teclado'] = load_texture("textures/teclado.png")
-    textures['tomada1'] = load_texture("textures/tomada1.png")
-    textures['tomada2'] = load_texture("textures/tomada2.png")
+    textures['porta1'] = load_texture("textures/door4.jpg")
+    textures['janela'] = load_texture("textures/janela4.jpg")
 
     glutMainLoop()
 
