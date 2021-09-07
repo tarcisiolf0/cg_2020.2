@@ -1,10 +1,10 @@
-# bedroomOpenGL
-## Quarto modelado com PyOpenGL
+# kitchenOpenGL
+## Cozinha modelado com PyOpenGL
 
 ### Projeto da disciplina de Computação Gráfica do curso de Ciência da Computação IC-UFAL
 ### Professor: Marcelo Costa Oliveira
-### Dupla: Myron e Cristiano
-#### PLE 2020
+### Dupla: Leandro e Tarcísio
+#### 2020.2
 
 Demonstração: https://www.youtube.com/watch?v=rVtttBJ74V4
 
@@ -48,7 +48,6 @@ Mais informações em: https://pypi.org/project/PyGLM/ e https://pypi.org/projec
 
 #### Executando:
 - Para rodar basta entrar na pasta do projeto e executar com: `py main.py`
-- Caso utilize o PyCharm para importar o projeto, basta executar(Shift+F10)
 
 #### Controles:
 - wasd movimentam a câmera
@@ -58,26 +57,9 @@ Mais informações em: https://pypi.org/project/PyGLM/ e https://pypi.org/projec
 - 'o' abre a porta, 'O' fecha
 - 'j' abre as janelas, 'J' fecha as janelas
 
-O projeto foi desenvolvido com a IDE PyCharm, logo, recomendo o uso do mesmo para modificação ou execução.
+O projeto foi desenvolvido com o Vscode.
 
 
-#### Referências:
-- Movimentação da câmera baseada em: 
-
-http://www.lighthouse3d.com/tutorials/glut-tutorial/keyboard-example-moving-around-the-world/ 
-
-https://learnopengl.com/Getting-started/Camera
-
-- Código das texturas baseado em: 
-
-https://github.com/mdrkb/3D-House-using-OpenGL-and-C-/ 
-
-https://open.gl/textures
-
-https://stackoverflow.com/questions/39194862/opengl-how-do-i-apply-a-texture-to-this-cube
-
-- Iluminação baseada em: 
-
-https://stackoverflow.com/questions/26032332/opengl-glut-spot-light/26033305 
-
-https://github.com/mgleysson/CG_UFAL/tree/master/Projeto_MuseuZG
+#### Referência:
+- Implementação de um quarto no openGL
+https://github.com/myrondavid/bedroomOpenGL

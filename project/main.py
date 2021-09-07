@@ -9,6 +9,9 @@ import pygame
 WINDOW_WIDHT = 1000
 WINDOW_HEIGHT = 1000
 
+# glm.vec3 - inicialização de um vetor de 3 dimensões
+
+
 # camera
 cameraPos = glm.vec3(0, 3.5, 30)
 cameraFront = glm.vec3(0, 0, -1)
@@ -47,8 +50,17 @@ half_width = WINDOW_WIDHT / 2
 half_height = WINDOW_HEIGHT / 2
 
 
-# Utilizadas
+# U
 def draw_wall(x0, y0, z0, x1, y1, z1):
+    # GLBegin - Specifies the primitive or primitives that will be created 
+    # from vertices presented between glBegin and the subsequent glEnd.
+
+    # GL_QUADS - argument that specifies in which way the vertices are interpreted.
+    # Treats each group of four vertices as an independent quadrilateral.
+
+    # glVertex3f - Specify x, y, z, coordinates of a vertex.
+
+
     glBegin(GL_QUADS)
     glVertex3f(x0, y0, z0)
     glVertex3f(x1, y0, z1)
@@ -57,11 +69,20 @@ def draw_wall(x0, y0, z0, x1, y1, z1):
     glEnd()
 
 def draw_textured_wall(x0, y0, z0, x1, y1, z1, texture):
+    # glEnable - enable or disable server-side GL capabilities
+
+    # GL_TEXTURE_2D - If enabled and no fragment shader is active, two-dimensional 
+    # texturing is performed (unless three-dimensional or cube-mapped texturing is 
+    # also enabled).
+
+    # gl_BindTexture - bind a named texture to a texturing target
+    # Specifies the target to which the texture is bound.
+
+    # glTexCoord — set the current texture coordinates
+
 
     glEnable(GL_TEXTURE_2D)
     glBindTexture(GL_TEXTURE_2D, texture)
-    # glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
-    # glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
 
     glBegin(GL_QUADS)
     glTexCoord2f(0.0, 0.0)
@@ -86,8 +107,6 @@ def draw_floor(x, y, z, width, length):
 def draw_textured_floor(x, y, z, width, length, texture):
     glEnable(GL_TEXTURE_2D)
     glBindTexture(GL_TEXTURE_2D, texture)
-    # glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
-    # glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
 
     glBegin(GL_QUADS)
     glTexCoord2f(0.0, 0.0)
@@ -111,6 +130,9 @@ def draw_block(x, y, z, width, length, height):
     draw_floor(x, y+height, z, width, length)
 
 def draw_texturized_block_right(x, y, z, width, length, height, texture):
+    # glColor3f - set the current color (GLfloat red, GLfloat green, GLfloat blue)
+
+    
     #left side
     draw_wall(x, y, z, x, y + height, z+length)
     #back side
@@ -122,7 +144,6 @@ def draw_texturized_block_right(x, y, z, width, length, height, texture):
     #up side
     draw_floor(x, y+height, z, width, length)
     #right side
-    # draw_wall(x+width, y, z, x + width, y + height, z + length)
     glColor3f(1, 1, 1)
     draw_textured_wall(x+width, y, z, x + width, y + height, z + length, texture)
 
@@ -170,7 +191,6 @@ def draw_texturized_block_up(x, y, z, width, length, height, texture):
     #up side
     glColor3f(1, 1, 1)
     draw_textured_floor(x, y+height, z, width, length, texture)
-    # draw_floor(x, y+height, z, width, length)
 
 def draw_colored_block(x, y, z, width, length, height, front_color, back_color, left_color, right_color, up_color, down_color):
     #left side
@@ -210,6 +230,18 @@ def draw_cylinder(x, y, z, radius, height):
     c_angle = 0
     angle_stepsize = 0.1
 
+
+    # GLBegin - Specifies the primitive or primitives that will be created 
+    # from vertices presented between glBegin and the subsequent glEnd.
+
+    # GL_QUADS_STRIP - Draws a connected group of quadrilaterals. One quadrilateral 
+    # is defined for each pair of vertices presented after the first pair. Vertices 2 
+    # ⁢ n - 1 , 2 ⁢ n , 2 ⁢ n + 2 , and 2 ⁢ n + 1 define quadrilateral n. N 2 - 1 
+    # quadrilaterals are drawn. Note that the order in which vertices are used to 
+    # construct a quadrilateral from strip data is different from that used with 
+    # independent data
+
+
     #desenha cilindro
     glBegin(GL_QUAD_STRIP)
     c_angle = 0
@@ -221,6 +253,11 @@ def draw_cylinder(x, y, z, radius, height):
         c_angle += angle_stepsize
     glEnd()
 
+
+    # GL_POLYGON - Draws a single, convex polygon. Vertices 1 through N define this 
+    # polygon.
+
+
     #desenha tampa do cilindro
     glBegin(GL_POLYGON)
     c_angle = 0
@@ -230,6 +267,11 @@ def draw_cylinder(x, y, z, radius, height):
         glVertex3f(x + px, y + height, z + pz)
         c_angle += angle_stepsize
     glEnd()
+
+
+    # GL_POLYGON - Draws a single, convex polygon. Vertices 1 through N define this 
+    # polygon.
+
 
     #desenha fundo do cilindro
     glBegin(GL_POLYGON)
@@ -242,10 +284,31 @@ def draw_cylinder(x, y, z, radius, height):
     glEnd()
 
 def draw_fan(x, y, z, rot):
-    glPushMatrix() #begin fan
+    # glPushMatrix - push the current matrix stack
+
+    # glPopMatrix() - pop the current matrix stack
+
+    # glTranslate - multiply the current matrix by a translation matrix
+
+    # glColor - set the current color glColor3ub(GLubyte red, GLubyte green, GLubyte blue);
+
+    # glRotatef - glRotate — multiply the current matrix by a rotation matrix
+    # glRotatef( GLfloat angle, GLfloat x, GLfloat y, GLfloat z);
+
+    # glScale - multiply the current matrix by a general scaling matrix
+    # glScalef(	GLfloat x, GLfloat y, GLfloat z);
+
+    # glutPostRedisplay - Mark the normal plane of current window as needing to be 
+    # redisplayed. The next iteration through glutMainLoop, the window's display 
+    # callback will be called to redisplay the window's normal plane.
+
+
+    #begin fan
+    glPushMatrix() 
     glTranslatef(x, y, z)
 
-    glPushMatrix() # motor + helices
+    # motor + helices
+    glPushMatrix() 
     glColor3ub(80, 80, 80)
     glTranslatef(0, 6, -12)
     glRotatef(180, 1, 0, 0)
@@ -269,7 +332,7 @@ def draw_fan(x, y, z, rot):
     glPopMatrix() #pop helices
     glutPostRedisplay()
     glPopMatrix() #pop motor
-    # glutPostRedisplay()
+
     glPopMatrix() #end fan
     
 def draw_chair(x, y, z):
@@ -307,7 +370,7 @@ def draw_lamp(x, y, z, color):
     glPopMatrix()
 
 
-# Feitas
+# F
 def draw_table1(x, y, z):
     glPushMatrix()
     glTranslatef(x, y, z)
@@ -386,6 +449,21 @@ def draw_sink(x, y, z):
 
 
 def display():
+    # glClear - clear buffers to preset values Bitwise OR of masks that
+    # indicate the buffers to be cleared.
+    # GL_COLOR_BUFFER_BIT - Indicates the buffers currently enabled for color writing.
+    # GL_DEPTH_BUFFER_BIT - Indicates the depth buffer.
+
+    # glLoadIdentity - replace the current matrix with the identity matrix
+
+    # gluLookAt - define a viewing transformation
+    # eyeX, eyeY, eyeZ - Specifies the position of the eye point.
+    # centerX, centerY, centerZ - Specifies the position of the reference point.
+    # upX, upY, upZ - Specifies the direction of the up vector.
+    
+    #  glutSwapBuffers - swaps the buffers of the current window if double buffered.
+
+
     global angle, texture_brick, fan_rotation, door_angle, window_angle
     # limpa cor e buffers de profundidade
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -398,13 +476,8 @@ def display():
               cameraPos.x + cameraFront.x, cameraPos.y + cameraFront.y, cameraPos.z + cameraFront.z,
               cameraUp.x, cameraUp.y, cameraUp.z)
 
-    #fixed cam
-    # gluLookAt(0, 5, 35,
-    #           0, 0, -5,
-    #           0, 1, 0)
 
-
-    glPushMatrix() # push quarto
+    glPushMatrix() # push cozinha
     # piso
     glColor(1, 1, 1)
     draw_textured_floor(-10, 0, -10, 20, 20, textures['piso'])
@@ -414,7 +487,6 @@ def display():
     draw_textured_wall(-10, 0, -10, 10, 7, -10, textures['parede'])
 
     # parede esquerda
-    # glColor3ub(181, 177, 163)
     glColor3ub(250, 250, 250)
     draw_textured_wall(-10, 0, -10, -10, 7, 10, textures['parede'])
 
@@ -427,13 +499,10 @@ def display():
     # part3 - parte direita parede porta
     draw_block(-5, 0, 10, 2, 0.4, 7)
     # part4 - parte cima da janela
-    # draw_block(-3, 6, 10, 13, 0.4, 1)
     draw_block(-3, 5, 10, 4, 0.4, 2)
     # part5 - parte baixo janela
-    #draw_block(-3, 0, 10, 4, 0.4, 5)
     draw_block(-3, 0, 10, 4, 0.4, 2.5)
     # part6 - restante da parede
-    #draw_block(1, 0, 10, 3, 0.4, 6)
     draw_block(1, 0, 10, 9, 0.4, 7)
 
    
@@ -444,7 +513,7 @@ def display():
     # alisais topo - suporte porta lado topo
     draw_colored_block_fixed(-7.9, 4.9, 10, 2.8, 0.4, 0.1)
 
-    
+
     # alisais esquerdo - suporte janela lado esquerdo
     draw_colored_block_fixed(-3, 2.5, 10, 0.1, 0.4, 2.5)
     # alisais direito - suporte janela lado direito
@@ -455,7 +524,6 @@ def display():
     draw_colored_block_fixed(-3, 4.9, 10, 4, 0.4, 0.1)
 
     #porta principal
-    # draw_colored_block_fixed(-7.9, 0, 10, 2.8, 0.1, 4.9)
     glPushMatrix()
     glTranslatef(-7.9, 0, 10)
     glRotatef(door_angle, 0, 1, 0)
@@ -464,11 +532,9 @@ def display():
 
     #janela 
     glPushMatrix()
-    #glTranslatef(-3, 5, 10)
     glTranslatef(-2.9, 4.9, 10)
     glRotatef(-window_angle, 1, 0, 0)
     glColor3ub(70, 35, 26)
-    #draw_texturized_block_front_and_back(0, 0, 0, 4, 0.1, -2.5, textures['janela'], textures['janela'])
     draw_texturized_block_front_and_back(0, 0, 0, 3.8, 0.1, -2.3, textures['janela'], textures['janela'])
     glPopMatrix()
 
@@ -544,43 +610,20 @@ def display():
 
     glutSwapBuffers()
 
-def keyboard_d_keys(key, dx, y):
-    global angle, cameraFront, cameraUp, cameraPos
-
-    if not isinstance(key, int):
-        key = key.decode("utf-8")
-
-    front = glm.vec3(0, 0, -1)
-
-    cam_speed = 0.2
-
-    if key == GLUT_KEY_LEFT:
-        print("D_KEYS_L ", key)
-        angle -= cam_speed
-        front.x = glm.sin(angle)
-        front.z = -glm.cos(angle)
-    elif key == GLUT_KEY_RIGHT:
-        print("D_KEYS_R ", key)
-        angle += cam_speed
-        front.x = glm.sin(angle)
-        front.z = -glm.cos(angle)
-    elif key == GLUT_KEY_UP:
-        print("D_KEYS_U ", key)
-        angle += cam_speed
-        front.y = glm.sin(angle)
-        # front.z = -glm.cos(angle)
-    elif key == GLUT_KEY_DOWN:
-        print("D_KEYS_D ", key)
-        angle -= cam_speed
-        front.y = glm.sin(angle)
-        # front.z = -glm.cos(angle)
-
-    # cameraFront = glm.normalize(front)
-    cameraFront = front
-    glutPostRedisplay()
-
-
 def keyboard(key, x, y):
+    # glm.cross - Returns the cross product of x and y.
+
+    # glm.normalize - Returns a vector in the same direction as x but with length of 1.
+
+    # glEnable - enable or disable server-side GL capabilities
+    # GL_LIGHTi - If enabled, include light i in the evaluation of the 
+    # lighting equation.
+
+    # glutPostRedisplay - Mark the normal plane of current window as needing to be 
+    # redisplayed. The next iteration through glutMainLoop, the window's display 
+    # callback will be called to redisplay the window's normal plane.
+
+
     global angle, cameraFront, cameraUp, cameraPos, door_angle, window_angle, light_ambient, light_specular, light_diffuse, lamp_color
 
     cameraSpeed = 0.5
@@ -629,6 +672,18 @@ def keyboard(key, x, y):
 
 
 def change_side(w, h):
+    # glMatrixMode - specify which matrix is the current matrix
+    # GL_MODELVIEW - Applies subsequent matrix operations to the 
+    # modelview matrix stack.
+    
+    # glLoadIdentity - replace the current matrix with the identity matrix
+
+    # glViewport - set the viewport 
+    # glViewport(GLint x, GLint y, GLsizei width, GLsizei height);
+
+    # gluPerspective - set up a perspective projection matrix
+    # gluPerspective(GLdouble fovy, GLdouble aspect, GLdouble zNear, GLdouble zFar);
+
     global half_width, half_height
     if h == 0:
         h = 1
@@ -677,6 +732,105 @@ def mouse_camera(mouse_x, mouse_y):
 
 
 def load_texture(image):
+    # pygame.image.load - load new image from a file
+
+    # pygame.image.tostring - transfer image to string buffer
+
+    # glGenTextures - generate texture names 
+    # glGenTextures( GLsizei n, GLuint * textures);
+    # n - Specifies the number of texture names to be generated.
+
+    # gl_BindTexture - bind a named texture to a texturing target
+    # Specifies the target to which the texture is bound.
+
+    # glPixelStorei - set pixel storage modes
+    # glPixelStorei(GLenum pname, GLint param);
+    # pname - Specifies the symbolic name of the parameter to be set. 
+    # One value affects the packing of pixel data into memory: GL_PACK_ALIGNMENT. 
+    # The other affects the unpacking of pixel data from memory: GL_UNPACK_ALIGNMENT.
+    # param - Specifies the value that pname is set to.
+
+    # GL_UNPACK_ALIGNMENT - Specifies the alignment requirements for the 
+    # start of each pixel row in memory. The allowable values are 1 (byte-alignment), 
+    # 2 (rows aligned to even-numbered bytes), 4 (word-alignment), 
+    # and 8 (rows start on double-word boundaries).
+
+    # glTexParameter - set texture parameters
+    # glTexParameterf(GLenum target, GLenum pname, GLfloat param)
+    # target - Specifies the target texture
+    # pname - Specifies the symbolic name of a single-valued texture parameter.
+    # param - Specifies the value of pname.
+
+    # GL_TEXTURE_2D - If enabled and no fragment shader is active, two-dimensional 
+    # texturing is performed (unless three-dimensional or cube-mapped texturing is 
+    # also enabled).
+
+    # GL_TEXTURE_WRAP_S - Sets the wrap parameter for texture coordinate s 
+    # GL_MIRRORED_REPEAT -  causes the s coordinate to be set to the fractional 
+    # part of the texture coordinate if the integer part of s is even; if the integer 
+    # part of s is odd, then the s texture coordinate is set to 1−frac(s),
+    # where frac(s) represents the fractional part of s.
+
+    # GL_TEXTURE_WRAP_T - Sets the wrap parameter for texture coordinate t 
+
+    # GL_TEXTURE_MAG_FILTER - The texture magnification function is used whenever 
+    # the level-of-detail function used when sampling from the texture determines 
+    # that the texture should be magified. It sets the texture magnification function 
+    # to either GL_NEAREST or GL_LINEAR (see below). GL_NEAREST is generally faster 
+    # than GL_LINEAR, but it can produce textured images with sharper edges because 
+    # the transition between texture elements is not as smooth. The initial value of 
+    # GL_TEXTURE_MAG_FILTER is GL_LINEAR.
+
+    # GL_LINEAR -Returns the weighted average of the texture elements that are closest
+    #  to the specified texture coordinates. These can include items wrapped or 
+    # repeated from other parts of a texture, depending on the values of GL_TEXTURE_WRAP_S 
+    # and GL_TEXTURE_WRAP_T, and on the exact mapping.
+
+    # GL_TEXTURE_MIN_FILTER - The texture minifying function is used whenever the level-of-detail 
+    # function used when sampling from the texture determines that the texture should be minified. 
+    # There are six defined minifying functions. Two of them use either the nearest texture elements or
+    # a weighted average of multiple texture elements to compute the texture value. The other four use mipmaps.
+
+    # GL_LINEAR_MIPMAP_LINEAR - Chooses the mipmap that most closely matches the size of the pixel being 
+    # textured and uses the GL_LINEAR criterion (a weighted average of the four texture elements that are 
+    # closest to the specified texture coordinates) to produce a texture value.
+
+    # glTextEnvf - set texture environment parameters
+    # glTexEnvf(GLenum target, GLenum pname, GLfloat param);
+    # target - Specifies a texture environment.
+    # name - Specifies the symbolic name of a texture environment parameter
+    # params - Specifies a pointer to a parameter array that contains either a 
+    # single symbolic constant, single floating-point number, or an RGBA color
+
+    # glTexImage2D - specify a two-dimensional texture image
+    # glTexImage2D(	GLenum target, GLint level,	GLint internalformat,
+    # GLsizei width, GLsizei height, GLint border, GLenum format,
+    # GLenum type, const void * data);
+
+    # target - Specifies the target texture.
+    # level - Specifies the level-of-detail number. Level 0 is the base image level. 
+    # Level n is the nth mipmap reduction image
+
+    # internalformat - Specifies the number of color components in the texture. 
+
+    # width - Specifies the width of the texture image. All implementations support 
+    # texture images that are at least 1024 texels wide.
+
+    # height - Specifies the height of the texture image, or the number of layers 
+    # in a texture array
+
+    # border - This value must be 0.
+
+    # format - Specifies the format of the pixel data
+
+    # type - Specifies the data type of the pixel data
+
+    # data - Specifies a pointer to the image data in memory.
+
+    # glGenerateMipmap - generate mipmaps for a specified texture object
+    # target - Specifies the target to which the texture object is bound for 
+    # glGenerateMipmap
+
     textureSurface = pygame.image.load(image)
     textureData = pygame.image.tostring(textureSurface, "RGBA", 1)
     width = textureSurface.get_width()
@@ -704,8 +858,6 @@ def load_texture(image):
 def setup_lighting():
     glEnable(GL_COLOR_MATERIAL)
     glEnable(GL_LIGHTING)
-    # glEnable(GL_LIGHT0)
-    # glEnable(GL_LIGHT1)
     glEnable(GL_DEPTH_TEST)
     glShadeModel(GL_SMOOTH)
     glEnable(GL_NORMALIZE)
@@ -713,7 +865,6 @@ def setup_lighting():
     glMaterialfv(GL_FRONT, GL_SPECULAR, [0.1, 0.1, 0.1, 1])
 
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, [0.8, 0.8, 0.8, 1])
-    # glLightModelfv(GL_LIGHT_MODEL_AMBIENT, [0.2, 0.2, 0.2, 1])
 
     glLightfv(GL_LIGHT0, GL_SPECULAR, [0.7, 0.7, 0.7, 1])
     glLightfv(GL_LIGHT0, GL_DIFFUSE, [0.3, 0.3, 0.3, 1])
@@ -730,11 +881,6 @@ def setup_lighting():
 
     glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, 20)
     glLightf(GL_LIGHT1, GL_SPOT_EXPONENT, 2.0)
-
-    # glLightfv(GL_LIGHT1, GL_CONSTANT_ATTENUATION, 1)
-    # glLightfv(GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.5)
-    # glLightfv(GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0.2)
-    # glLightfv(GL_LIGHT1, GL_SPOT_EXPONENT, 2.0)
 
 
 def main():
@@ -754,7 +900,6 @@ def main():
     glutDisplayFunc(display)
     glutReshapeFunc(change_side)
     glutKeyboardFunc(keyboard)
-    # glutSpecialFunc(keyboard_d_keys) #old camera
     glutMouseFunc(mouse_click)
     glutMotionFunc(mouse_camera)
 
