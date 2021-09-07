@@ -1,12 +1,12 @@
 # kitchenOpenGL
-## Cozinha modelado com PyOpenGL
+## Cozinha modelada com PyOpenGL
 
 ### Projeto da disciplina de Computação Gráfica do curso de Ciência da Computação IC-UFAL
 ### Professor: Marcelo Costa Oliveira
 ### Dupla: Leandro e Tarcísio
 #### 2020.2
 
-Demonstração: https://www.youtube.com/watch?v=rVtttBJ74V4
+Demonstração: 
 
 
 #### Requisitos para rodar:
@@ -62,4 +62,5 @@ O projeto foi desenvolvido com o Vscode.
 
 #### Referência:
 - Implementação de um quarto no openGL
+
 https://github.com/myrondavid/bedroomOpenGL
